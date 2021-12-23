@@ -1,7 +1,9 @@
 package com.tests;
 
+import Pages.HomePage;
 import Pages.LoginPage;
 import commonLibs.Utils.PropReader;
+import commonLibs.Utils.ReportUtils;
 import commonLibs.implementation.CommonDriver;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterClass;
@@ -17,6 +19,8 @@ public class BaseTest {
     Properties properties;
     String currentWorkingDirectory;
     LoginPage loginPage;
+    HomePage homePage;
+    ReportUtils reportUtils;
 
     @BeforeClass
     public void setup() {
@@ -31,6 +35,8 @@ public class BaseTest {
         driver = commonDriver.getDriver();
         commonDriver.navigateToURL(properties.getProperty("url"));
         loginPage = new LoginPage(driver);
+        homePage = new HomePage(driver);
+        reportUtils = new ReportUtils(currentWorkingDirectory + "/src/test/resources/reports/OrangeReport.html");
     }
 
     @AfterClass
